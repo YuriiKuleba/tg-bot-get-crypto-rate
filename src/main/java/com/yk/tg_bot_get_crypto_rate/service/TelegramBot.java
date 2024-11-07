@@ -28,17 +28,16 @@ public class TelegramBot extends TelegramLongPollingBot {
             long chatId = update.getMessage().getChatId();
 
             switch (messageText) {
-                case "/start" -> {
-                    startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
-                }
+                case "/start" -> startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
                 default -> {
                     try {
                         currency = CurrencyService.getCurrencyRate(messageText, currencyModel);
                     } catch (IOException e) {
-                        sendMessage(chatId, "We have not found such a cryptocurrency." + "\n" +
-                            "Enter the cryptocurrency whose exchange rate" + "\n" +
-                            "you want to know in relation to USDT" + "\n" +
-                            "For example: DOT");
+                        sendMessage(chatId, """
+                            We have not found such a cryptocurrency.
+                            Enter the cryptocurrency whose exchange rate
+                            you want to know in relation to USDT
+                            For example: DOT""");
                     }catch (ParseException e) {
                         throw new RuntimeException("Unable to parse date");
                     }
@@ -49,6 +48,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     }
 
+    @Override
     public String getBotToken() {
         return botConfig.getBotToken();
     }
@@ -59,10 +59,12 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private void startCommandReceived(Long chatId, String name) {
-        String answer = "Hi, " + name + ", nice to meet you!" + "\n" +
-            "Enter the cryptocurrency whose exchange rate" + "\n" +
-            "you want to know in relation to USDT." + "\n" +
-            "For example: DOT";
+        String answer = """
+            Hi, %s, nice to meet you!
+            Enter the cryptocurrency whose exchange rate
+            you want to know in relation to USDT
+            For example: DOT.
+            """.formatted(name);
         sendMessage(chatId, answer);
     }
 

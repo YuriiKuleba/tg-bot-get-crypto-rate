@@ -13,19 +13,21 @@ import java.util.Scanner;
 
 public class CurrencyService {
 
+    private static final String BINANCE_API_URL = "https://api.binance.com/api/v3/avgPrice?symbol=";
+
     public static String getCurrencyRate(String message, CurrencyModel model) throws IOException, ParseException {
 
-        URL url = new URL("https://api.binance.com/api/v3/avgPrice?symbol=" + message.toUpperCase() + "USDT");
+        URL url = new URL(BINANCE_API_URL + message.toUpperCase() + StableCoin.USDT);
 
         Scanner scanner = new Scanner((InputStream) url.getContent());
 
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
         while (scanner.hasNext()) {
-            result += scanner.nextLine();
+            result.append(scanner.nextLine());
         }
 
-        JSONObject jsonObject = new JSONObject(result);
+        JSONObject jsonObject = new JSONObject(result.toString());
 
         model.setMins(jsonObject.getInt("mins"));
         model.setPrice(jsonObject.getDouble("price"));
@@ -35,6 +37,12 @@ public class CurrencyService {
     }
 
     private static BigDecimal getScale(CurrencyModel model) {
-        return BigDecimal.valueOf(model.getPrice()).setScale(2, RoundingMode.HALF_UP);
+        return BigDecimal.valueOf(model.getPrice()).setScale(3, RoundingMode.HALF_UP);
+    }
+
+    enum StableCoin {
+        USDT,
+        USDC,
+        FDUSD
     }
 }
