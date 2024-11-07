@@ -31,7 +31,7 @@ public class CurrencyService {
         model.setPrice(jsonObject.getDouble("price"));
         model.setCloseTime(jsonObject.getLong("closeTime"));
 
-        return "The price of %s at the moment is: $%s".formatted(message, getScale(model));
+        return "The price of %s at the moment is: $%s".formatted(message.toUpperCase(), getScale(model));
     }
 
     private static BigDecimal getScale(CurrencyModel model) {
