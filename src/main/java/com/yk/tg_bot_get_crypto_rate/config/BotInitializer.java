@@ -1,6 +1,6 @@
 package com.yk.tg_bot_get_crypto_rate.config;
 
-import com.yk.tg_bot_get_crypto_rate.service.TelegramBot;
+import com.yk.tg_bot_get_crypto_rate.bot.TelegramBot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;

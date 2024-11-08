@@ -5,11 +5,7 @@ import lombok.Data;
 @Data
 public class CurrencyModel {
 
-    private Integer mins;
-
+    private String symbol;
     private Double price;
-
-    private Long closeTime;
-
 
 }
