@@ -1,7 +1,7 @@
 package com.yk.tg_bot_get_crypto_rate.command;
 
-import com.yk.tg_bot_get_crypto_rate.service.SendBotMessageService;
 import com.google.common.collect.ImmutableMap;
+import com.yk.tg_bot_get_crypto_rate.service.SendBotMessageService;
 
 import static com.yk.tg_bot_get_crypto_rate.command.CommandName.*;
 
