@@ -2,9 +2,11 @@ package com.yk.tg_bot_get_crypto_rate.service;
 
 import com.yk.tg_bot_get_crypto_rate.bot.TelegramBot;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+@Service
 public class SendBotMessageServiceImpl implements SendBotMessageService {
 
     private final TelegramBot telegramBot;

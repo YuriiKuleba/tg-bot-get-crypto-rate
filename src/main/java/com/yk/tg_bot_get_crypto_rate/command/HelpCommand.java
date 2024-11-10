@@ -13,9 +13,14 @@ public class HelpCommand implements Command {
         <b>Start\\end working with the bot</b>
         %s - start working with me
         %s - pause working with me
+        %s - i can show you crypto prices
         
         %s - get help working with me
-        """.formatted(START.getCommandName(), STOP.getCommandName(), HELP.getCommandName());
+        """.formatted(
+        START.getCommandName(),
+        STOP.getCommandName(),
+        GET_RATE.getCommandName(),
+        HELP.getCommandName());
 
     private final SendBotMessageService sendBotMessageService;
 
