@@ -1,14 +1,19 @@
 package com.yk.tg_bot_get_crypto_rate.command;
 
+import com.yk.tg_bot_get_crypto_rate.bot.TelegramBot;
 import com.yk.tg_bot_get_crypto_rate.model.CurrencyModel;
 import com.yk.tg_bot_get_crypto_rate.provider.ServiceLocator;
 import com.yk.tg_bot_get_crypto_rate.service.RateService;
 import com.yk.tg_bot_get_crypto_rate.service.SendBotMessageService;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
+import org.telegram.telegrambots.meta.generics.BotOptions;
+import org.telegram.telegrambots.meta.generics.LongPollingBot;
 
 import java.io.IOException;
 
-public class GetCurrencyRateCommand implements Command {
+public class GetCurrencyRateCommand implements Command{
 
     CurrencyModel currencyModel;
 
@@ -35,19 +40,22 @@ public class GetCurrencyRateCommand implements Command {
 
     @Override
     public void perform(Update update) {
-        String currency = "";
+        SendMessage message = new SendMessage();
+        String coin = "";
         String chatId = update.getMessage().getChatId().toString();
 
         sendBotMessageService.sendMessage(chatId, GET_RATE_MESSAGE.formatted(update.getMessage().getChat().getFirstName()));
 
-        try {
-            currency = rateService.getCurrencyRate("DOGE");
-            sendBotMessageService.sendMessage(chatId, currency);
-        } catch (IOException e) {
-            sendBotMessageService.sendMessage(chatId, GET_RATE_FAILED_MESSAGE);
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            message.setText(coin);
+            message.setChatId(chatId);
+            try {
+                coin = rateService.getCurrencyRate(message.getText());
+                sendBotMessageService.sendMessage(chatId, coin);
+            } catch (IOException e) {
+                sendBotMessageService.sendMessage(chatId, GET_RATE_FAILED_MESSAGE);
+            }
         }
-
-
     }
 
 }

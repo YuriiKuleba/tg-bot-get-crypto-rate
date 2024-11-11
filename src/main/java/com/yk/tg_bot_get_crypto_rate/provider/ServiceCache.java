@@ -7,15 +7,13 @@ import java.util.Map;
 
 public class ServiceCache {
 
-    private Map<String, RateService> rateServices = new HashMap<>();
+    private final Map<String, RateService> rateServices = new HashMap<>();
 
     public  RateService getService(String serviceName) {
-        // retrieve from the list
         return rateServices.get(serviceName);
     }
 
     public void addService(RateService newService) {
-        // add to the list
         rateServices.put(newService.getServiceName(), newService);
     }
 }

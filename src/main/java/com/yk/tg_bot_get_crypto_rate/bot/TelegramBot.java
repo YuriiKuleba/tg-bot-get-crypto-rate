@@ -6,9 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import static com.yk.tg_bot_get_crypto_rate.command.CommandName.NO;
 
@@ -52,17 +50,6 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Override
     public String getBotUsername() {
         return botName;
-    }
-
-    public void sendMessage(Long chatId, String textToSend) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(String.valueOf(chatId));
-        sendMessage.setText(textToSend);
-        try {
-            execute(sendMessage);
-        } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }
