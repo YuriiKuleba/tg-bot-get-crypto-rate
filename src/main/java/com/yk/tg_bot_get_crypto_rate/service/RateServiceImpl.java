@@ -30,10 +30,10 @@ public class RateServiceImpl implements RateService {
 
         JSONObject jsonObject = new JSONObject(result.toString());
 
-//        model.setSymbol(jsonObject.getString("symbol"));
-//        model.setPrice(jsonObject.getDouble("price"));
+        String symbol = jsonObject.getString("symbol");
+        Double price = jsonObject.getDouble("price");
 
-        return "The price of %s at the moment is: $%s".formatted(coin.toUpperCase(), 0.26);
+        return "The price of %s at the moment is: $%s".formatted(symbol.toUpperCase(), price);
     }
 
     @Override

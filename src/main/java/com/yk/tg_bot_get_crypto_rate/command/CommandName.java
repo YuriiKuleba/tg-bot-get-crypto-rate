@@ -8,7 +8,7 @@ public enum CommandName {
     START("/start"),
     STOP("/stop"),
     HELP("/help"),
-    GET_RATE("/get_cc_rate"),
+    GET_RATE("/"),
     NO("/No");
 
     private final String commandName;

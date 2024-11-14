@@ -7,9 +7,14 @@ public class StartCommand implements Command{
 
     private final static String START_MESSAGE = """
         Hi, %s, nice to meet you!
+        
         I am a bot created by Yuri Kuleba -
         a young programming star 😀
-        Type /help to see what I can!
+        
+        Type /help to see what I can or
+        type /+Cryptocurrency you want 
+        to know in relation to USDT, 
+        for example: <em>/ DOT</em>.
         """;
 
     private final SendBotMessageService sendBotMessageService;
